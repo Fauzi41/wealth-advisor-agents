@@ -1,0 +1,15 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# Pytest
+.pytest_cache/
+
+# Runtime state (regenerated on each run)
+memory_store/memory.json
+outputs/
