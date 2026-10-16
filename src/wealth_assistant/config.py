@@ -51,6 +51,9 @@ RISK_KYC_EXPIRED_BONUS = 10  # added when KYC is expired
 RETRY_COUNT = 3
 BACKOFF_BASE_S = 0.5
 
+# --- human-in-the-loop -----------------------------------------------------------
+HITL_RISK_THRESHOLD = 70  # human review required when risk_score >= 70
+
 # --- LLM (optional; the system runs fully without these) -------------------------
 LLM_TIMEOUT_S = 20
 LLM_MAX_TOKENS = 600

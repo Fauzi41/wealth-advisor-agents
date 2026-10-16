@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from pydantic import ValidationError
 
@@ -33,7 +33,16 @@ class ClientLoaderTool(Tool):
 
     name = "client_loader"
 
-    def _execute(self, path: str = DEFAULT_PATH) -> ToolResult:
+    def __init__(self, path: str = DEFAULT_PATH) -> None:
+        """Create the loader.
+
+        Args:
+            path: Default clients file (overridable per run() call).
+        """
+        self._default_path = path
+
+    def _execute(self, path: Optional[str] = None) -> ToolResult:
+        path = path or self._default_path
         try:
             text = Path(path).read_text(encoding="utf-8")
         except FileNotFoundError:
