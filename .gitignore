@@ -12,4 +12,7 @@ __pycache__/
 
 # Runtime state (regenerated on each run)
 memory_store/memory.json
-outputs/
+outputs/*
+!outputs/sample_output.json
+!outputs/sample_report.md
+!outputs/sample.log

@@ -1,0 +1,180 @@
+{
+  "run_id": "42c51587-d12e-45ac-b942-e2c596bfe6bc",
+  "client_id": "C002",
+  "generated_at": "2026-10-16T01:34:50.783722Z",
+  "status": "success",
+  "data_quality_warnings": [],
+  "portfolio_summary": {
+    "total_value": 20000.0,
+    "allocation": {
+      "equity": 0.7,
+      "bond": 0.2,
+      "cash": 0.1
+    },
+    "drift": {
+      "equity": 0.0,
+      "bond": 0.0,
+      "cash": 0.0
+    },
+    "concentration": {
+      "symbol": "VTI",
+      "fraction": 0.3
+    }
+  },
+  "anomalies": [
+    {
+      "id": "large_vs_income:C002-T27",
+      "type": "large_vs_income",
+      "severity": "high",
+      "description": "Debit C002-T27 of 5,000.00 exceeds 50% of monthly income (9,000.00).",
+      "evidence": {
+        "transaction_id": "C002-T27",
+        "amount": 5000.0,
+        "monthly_income": 9000.0,
+        "ratio": 0.556
+      },
+      "rule": "large_vs_income"
+    },
+    {
+      "id": "new_merchant_large:C002-T27",
+      "type": "new_merchant_large",
+      "severity": "high",
+      "description": "First transaction at new merchant 'Crypto Exchange' is a large debit of 5,000.00.",
+      "evidence": {
+        "transaction_id": "C002-T27",
+        "merchant": "Crypto Exchange",
+        "amount": 5000.0,
+        "monthly_income": 9000.0,
+        "threshold": 1800.0
+      },
+      "rule": "new_merchant_large"
+    },
+    {
+      "id": "velocity:B1",
+      "type": "velocity",
+      "severity": "high",
+      "description": "Account B1 had 6 transactions within 24h.",
+      "evidence": {
+        "account_id": "B1",
+        "count": 6,
+        "window_start": "2026-08-15",
+        "window_end": "2026-08-15"
+      },
+      "rule": "velocity"
+    },
+    {
+      "id": "outlier_transaction:C002-T17",
+      "type": "outlier_transaction",
+      "severity": "medium",
+      "description": "Transaction C002-T17 of 1,200.00 is an outlier in category 'groceries' (robust z=61.4).",
+      "evidence": {
+        "transaction_id": "C002-T17",
+        "category": "groceries",
+        "amount": 1200.0,
+        "median": 102.3,
+        "mad": 12.049999999999997,
+        "z_score": 61.44,
+        "threshold": 3.5
+      },
+      "rule": "outlier_transaction"
+    },
+    {
+      "id": "duplicates:C002-T18",
+      "type": "duplicates",
+      "severity": "medium",
+      "description": "2 transactions share amount 85.40, merchant 'Trader Joes', date 2026-09-12.",
+      "evidence": {
+        "transaction_ids": [
+          "C002-T18",
+          "C002-T19"
+        ],
+        "amount": 85.4,
+        "merchant": "Trader Joes",
+        "date": "2026-09-12",
+        "count": 2
+      },
+      "rule": "duplicates"
+    },
+    {
+      "id": "round_number_withdrawal:C002-T27",
+      "type": "round_number_withdrawal",
+      "severity": "medium",
+      "description": "Debit C002-T27 of 5,000.00 is a round-number withdrawal.",
+      "evidence": {
+        "transaction_id": "C002-T27",
+        "amount": 5000.0
+      },
+      "rule": "round_number_withdrawal"
+    }
+  ],
+  "risk_score": 100,
+  "recommendations": [
+    {
+      "action": "Contact client to verify flagged activity",
+      "rationale": "3 high-severity finding(s): large_vs_income, new_merchant_large, velocity.",
+      "priority": "high",
+      "requires_approval": true
+    }
+  ],
+  "crm_context": {
+    "client_id": "C002",
+    "advisor_name": "Sam Lee",
+    "kyc_status": "valid",
+    "kyc_expiry": "2027-01-15",
+    "last_contact_date": "2026-08-25",
+    "risk_tolerance_updated": "moderate",
+    "life_events": [],
+    "notes": "Flagged unusual activity for review."
+  },
+  "narrative": {
+    "executive_summary": "Portfolio review for client C002: risk score 100/100 with 6 finding(s), 3 of them high severity.",
+    "talking_points": [
+      "[HIGH] Debit C002-T27 of 5,000.00 exceeds 50% of monthly income (9,000.00).",
+      "[HIGH] First transaction at new merchant 'Crypto Exchange' is a large debit of 5,000.00.",
+      "[HIGH] Account B1 had 6 transactions within 24h.",
+      "[MEDIUM] Transaction C002-T17 of 1,200.00 is an outlier in category 'groceries' (robust z=61.4).",
+      "[MEDIUM] 2 transactions share amount 85.40, merchant 'Trader Joes', date 2026-09-12."
+    ],
+    "caveats": [
+      "Generated from a template without an LLM; all figures are deterministic outputs of the analysis."
+    ],
+    "summary_source": "template"
+  },
+  "human_review": {
+    "required": true,
+    "decision": "auto",
+    "note": "auto-approved (flag)"
+  },
+  "changes_since_last_review": {
+    "new": [
+      "duplicates:C002-T18",
+      "large_vs_income:C002-T27",
+      "new_merchant_large:C002-T27",
+      "outlier_transaction:C002-T17",
+      "round_number_withdrawal:C002-T27",
+      "velocity:B1"
+    ],
+    "resolved": [],
+    "worsened": []
+  },
+  "trace": [
+    {
+      "step": "ingest",
+      "agent": "data_fetcher",
+      "status": "ok",
+      "duration_ms": 0
+    },
+    {
+      "step": "analyze",
+      "agent": "analyzer",
+      "status": "ok",
+      "duration_ms": 0
+    },
+    {
+      "step": "recommend",
+      "agent": "advisor",
+      "status": "ok",
+      "duration_ms": 0
+    }
+  ]
+}
