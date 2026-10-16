@@ -170,3 +170,196 @@ def test_memory_feeds_changes_and_balance_drop(tmp_path):
         (tmp_path / "outputs" / "report_C1.json").read_text())
     assert report["changes_since_last_review"]["new"] == ["a2"]
     assert report["changes_since_last_review"]["resolved"] == []
+
+
+# ======================================================================
+# Phase 7: end-to-end tests with the REAL registry, tools and data files.
+# No network access, no API keys: no_llm=True, CRM_FAILURE_MODE via env.
+# ======================================================================
+import sys
+from pathlib import Path
+
+from wealth_assistant.llm.base import LLMClient, LLMResponse
+from wealth_assistant.memory import LongTermMemory
+from wealth_assistant.tools.llm_summarizer import LLMSummarizerTool
+
+DATA_PATH = str(Path(__file__).resolve().parent.parent / "data" / "clients.json")
+
+
+def real_orchestrator(tmp_path, name="e2e", **kwargs):
+    """Orchestrator with the real default registry and real data files."""
+    return Orchestrator(
+        data_path=DATA_PATH,
+        output_dir=str(tmp_path / name / "outputs"),
+        memory_path=str(tmp_path / name / "memory.json"),
+        no_llm=True,
+        **kwargs,
+    )
+
+
+def read_report(tmp_path, name, client_id):
+    return json.loads(
+        (tmp_path / name / "outputs" / f"report_{client_id}.json").read_text())
+
+
+def test_e2e_c001_happy_path(tmp_path):
+    orch = real_orchestrator(tmp_path, "t1")
+    results = orch.run(["C001"], auto_approve=True)
+
+    assert results[0]["status"] == "success"
+    report = read_report(tmp_path, "t1", "C001")
+    assert report["status"] == "success"
+    assert report["risk_score"] == 0
+    assert report["anomalies"] == []
+    assert report["human_review"]["required"] is False
+    assert report["human_review"]["decision"] == "not_required"
+    assert (tmp_path / "t1" / "outputs" / "report_C001.md").exists()
+
+
+def test_e2e_c002_anomaly_path(tmp_path):
+    orch = real_orchestrator(tmp_path, "t2")
+    results = orch.run(["C002"], auto_approve=True)
+
+    assert results[0]["status"] == "success"
+    report = read_report(tmp_path, "t2", "C002")
+    rules = {a["rule"] for a in report["anomalies"]}
+    assert {"outlier_transaction", "duplicates", "velocity",
+            "round_number_withdrawal", "new_merchant_large",
+            "large_vs_income"} <= rules
+    assert any(a["severity"] == "high" for a in report["anomalies"])
+    assert report["human_review"]["required"] is True
+    assert report["human_review"]["decision"] == "auto"
+
+
+def test_e2e_crm_timeout_degraded(tmp_path, monkeypatch):
+    monkeypatch.setenv("CRM_FAILURE_MODE", "timeout")
+    monkeypatch.setattr(
+        "wealth_assistant.tools.crm.time.sleep", lambda s: None)
+    orch = real_orchestrator(tmp_path, "t3")
+    results = orch.run(["C001"], auto_approve=True)
+
+    assert results[0]["status"] == "degraded"
+    report = read_report(tmp_path, "t3", "C001")
+    assert report["status"] == "degraded"
+    # pipeline still completes all three steps
+    assert {t["step"] for t in report["trace"]} == {
+        "ingest", "analyze", "recommend"}
+    assert any("CRM" in w for w in report["data_quality_warnings"])
+
+
+def test_e2e_malformed_c005_failed_batch_continues(tmp_path):
+    orch = real_orchestrator(tmp_path, "t4")
+    results = orch.run(["C005", "C001"], auto_approve=True)
+
+    by_id = {r["client_id"]: r["status"] for r in results}
+    assert by_id == {"C005": "failed", "C001": "success"}
+    bad = read_report(tmp_path, "t4", "C005")
+    assert bad["status"] == "failed"
+    assert bad["trace"][0]["step"] == "ingest"
+    assert bad["trace"][0]["status"] == "failed"
+
+
+def test_e2e_c004_no_crm_no_transactions(tmp_path):
+    orch = real_orchestrator(tmp_path, "t5")
+    results = orch.run(["C004"], auto_approve=True)
+
+    assert results[0]["status"] == "degraded"
+    report = read_report(tmp_path, "t5", "C004")
+    assert report["status"] == "degraded"
+    assert report["anomalies"] == []
+    assert report["risk_score"] == 0
+    assert report["human_review"]["decision"] == "not_required"
+
+
+def test_e2e_hitl_override_recorded(tmp_path, monkeypatch):
+    monkeypatch.setattr(sys.stdin, "isatty", lambda: True)
+    answers = iter(["o", "1", "p", "low", "downgraded after verification call"])
+    monkeypatch.setattr("builtins.input", lambda prompt="": next(answers))
+
+    orch = real_orchestrator(tmp_path, "t6")
+    orch.run(["C002"], auto_approve=False)
+
+    report = read_report(tmp_path, "t6", "C002")
+    assert report["human_review"]["required"] is True
+    assert report["human_review"]["decision"] == "overridden"
+    assert "downgraded after verification call" in report["human_review"]["note"]
+    assert len(report["recommendations"]) == 1
+    assert report["recommendations"][0]["priority"] == "low"
+
+
+def test_e2e_second_run_changes_populated(tmp_path):
+    orch = real_orchestrator(tmp_path, "t7")
+    orch.run(["C002"], auto_approve=True)
+    first = read_report(tmp_path, "t7", "C002")
+    first_ids = {a["id"] for a in first["anomalies"]}
+    dup_id = next(a["id"] for a in first["anomalies"]
+                  if a["rule"] == "duplicates")
+    vel_id = next(a["id"] for a in first["anomalies"]
+                  if a["rule"] == "velocity")
+    # first run: everything is new
+    assert first["changes_since_last_review"]["new"] == sorted(first_ids)
+
+    # simulate an older, different history in memory (same instance the
+    # orchestrator uses, as in a real single-process run)
+    orch.memory.save_summary("C002", {
+        "risk_score": 20,
+        "anomalies": [
+            {"type": "velocity", "id": vel_id, "severity": "low"},
+            {"type": "duplicates", "id": dup_id, "severity": "medium"},
+            {"type": "old_rule", "id": "old:1", "severity": "low"},
+        ],
+        "recommendations": [],
+        "total_balance": 12000.0,
+    })
+
+    orch.run(["C002"], auto_approve=True)
+    second = read_report(tmp_path, "t7", "C002")
+    changes = second["changes_since_last_review"]
+    assert changes["resolved"] == ["old:1"]
+    assert changes["worsened"] == [vel_id]  # low -> high
+    assert changes["new"] == sorted(first_ids - {vel_id, dup_id})
+
+
+class FakeLLMClient(LLMClient):
+    """Offline LLM double returning a valid JSON summary."""
+
+    def __init__(self):
+        self.provider = "fake"
+        self.model = "fake-model"
+        self.calls = 0
+
+    def complete(self, system, user, max_tokens):
+        self.calls += 1
+        return LLMResponse(
+            text='{"executive_summary": "LLM summary.", '
+                 '"talking_points": ["t1"], "caveats": ["c1"]}',
+            provider=self.provider, model=self.model, latency_ms=3,
+            input_tokens=5, output_tokens=7)
+
+    def ping(self):
+        return True
+
+
+def _deterministic_fields(report):
+    return {
+        "anomalies": report["anomalies"],
+        "risk_score": report["risk_score"],
+        "recommendations": report["recommendations"],
+    }
+
+
+def test_e2e_llm_vs_template_deterministic_fields_identical(tmp_path):
+    orch_llm = real_orchestrator(tmp_path, "t8a")
+    fake = FakeLLMClient()
+    orch_llm.registry.register(LLMSummarizerTool(fake))
+    orch_llm.run(["C002"], auto_approve=True)
+    llm_report = read_report(tmp_path, "t8a", "C002")
+    assert fake.calls == 1
+    assert llm_report["narrative"]["summary_source"].startswith("llm:")
+
+    orch_tpl = real_orchestrator(tmp_path, "t8b")
+    orch_tpl.run(["C002"], auto_approve=True)
+    tpl_report = read_report(tmp_path, "t8b", "C002")
+    assert tpl_report["narrative"]["summary_source"] == "template"
+
+    assert _deterministic_fields(llm_report) == _deterministic_fields(tpl_report)

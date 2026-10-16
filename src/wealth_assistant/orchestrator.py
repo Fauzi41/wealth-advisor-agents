@@ -18,7 +18,7 @@ from .hitl import checkpoint
 from .llm.factory import build_llm_client
 from .logging_setup import get_logger
 from .memory import LongTermMemory
-from .models import HumanReview, Narrative, Report
+from .models import HumanReview, Narrative, Recommendation, Report
 from .tools.client_loader import ClientLoaderTool
 from .tools.llm_summarizer import LLMSummarizerTool
 from .tools.registry import ToolRegistry, create_default_registry
@@ -209,10 +209,17 @@ class Orchestrator:
             context.client_id, current
         )
 
-        review = checkpoint(
-            report.model_dump(mode="json"), auto_approve=auto_approve
-        )
+        # checkpoint() mutates its input dict in place, so keep the dumped
+        # copy to merge reviewer edits (priority changes, deletions) back.
+        hitl_input = report.model_dump(mode="json")
+        review = checkpoint(hitl_input, auto_approve=auto_approve)
         report.human_review = review
+        edited = {r["action"]: r for r in hitl_input["recommendations"]}
+        report.recommendations = [
+            Recommendation(**edited[r.action])
+            for r in report.recommendations
+            if r.action in edited
+        ]
         log.info("hitl_done", f"decision={review.decision}")
 
         if review.decision != "rejected":
