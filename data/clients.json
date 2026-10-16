@@ -1,1 +1,1028 @@
-[{"accounts":[{"account_id":"A1","balance":25000,"currency":"USD","type":"checking"},{"account_id":"A2","balance":60000,"currency":"USD","type":"brokerage"}],"age":52,"client_id":"C001","holdings":[{"asset_class":"equity","market_value":18000,"quantity":100,"symbol":"AAPL"},{"asset_class":"bond","market_value":9000,"quantity":100,"symbol":"BND"},{"asset_class":"cash","market_value":3000,"quantity":3000,"symbol":"CASH"}],"monthly_income":8000,"name":"Jane Doe","risk_profile":"moderate","target_allocation":{"bond":0.3,"cash":0.1,"equity":0.6},"transactions":[{"account_id":"A1","amount":120.5,"category":"groceries","date":"2026-09-02","id":"T1","merchant":"Whole Foods","type":"debit"},{"account_id":"A1","amount":98.2,"category":"groceries","date":"2026-09-05","id":"T2","merchant":"Trader Joes","type":"debit"},{"account_id":"A1","amount":145.0,"category":"groceries","date":"2026-09-09","id":"T3","merchant":"Whole Foods","type":"debit"},{"account_id":"A1","amount":110.75,"category":"groceries","date":"2026-09-14","id":"T4","merchant":"Whole Foods","type":"debit"},{"account_id":"A1","amount":132.4,"category":"groceries","date":"2026-09-20","id":"T5","merchant":"Trader Joes","type":"debit"},{"account_id":"A1","amount":2400.0,"category":"groceries","date":"2026-09-27","id":"T6","merchant":"Costco","type":"debit"},{"account_id":"A1","amount":5000.0,"category":"travel","date":"2026-10-03","id":"T7","merchant":"Airline Co","type":"debit"},{"account_id":"A1","amount":8000.0,"category":"income","date":"2026-10-05","id":"T8","merchant":"Employer","type":"credit"}]},{"accounts":[{"account_id":"A3","balance":40000,"currency":"USD","type":"savings"}],"client_id":"C002","holdings":[{"asset_class":"equity","market_value":35000,"quantity":140,"symbol":"TSLA"}],"name":"John Smith","risk_profile":"conservative","transactions":[{"account_id":"A3","amount":2000.0,"category":"transfer","date":"2026-10-01","id":"T9","merchant":"Brokerage","type":"debit"}]}]
+[
+  {
+    "client_id": "C001",
+    "name": "Jane Doe",
+    "age": 45,
+    "risk_profile": "moderate",
+    "monthly_income": 12000,
+    "target_allocation": {
+      "equity": 0.5,
+      "bond": 0.3,
+      "cash": 0.2
+    },
+    "accounts": [
+      {
+        "account_id": "A1",
+        "type": "checking",
+        "balance": 18000,
+        "currency": "USD"
+      },
+      {
+        "account_id": "A2",
+        "type": "brokerage",
+        "balance": 50000,
+        "currency": "USD"
+      }
+    ],
+    "holdings": [
+      {
+        "symbol": "VTI",
+        "asset_class": "equity",
+        "quantity": 120,
+        "market_value": 10000
+      },
+      {
+        "symbol": "VXUS",
+        "asset_class": "equity",
+        "quantity": 150,
+        "market_value": 9000
+      },
+      {
+        "symbol": "AAPL",
+        "asset_class": "equity",
+        "quantity": 35,
+        "market_value": 6000
+      },
+      {
+        "symbol": "BND",
+        "asset_class": "bond",
+        "quantity": 180,
+        "market_value": 15000
+      },
+      {
+        "symbol": "CASH",
+        "asset_class": "cash",
+        "quantity": 10000,
+        "market_value": 10000
+      }
+    ],
+    "transactions": [
+      {
+        "id": "C001-T01",
+        "date": "2026-07-31",
+        "amount": 12000.0,
+        "type": "credit",
+        "category": "income",
+        "merchant": "Employer",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T02",
+        "date": "2026-08-29",
+        "amount": 12000.0,
+        "type": "credit",
+        "category": "income",
+        "merchant": "Employer",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T03",
+        "date": "2026-09-30",
+        "amount": 12000.0,
+        "type": "credit",
+        "category": "income",
+        "merchant": "Employer",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T04",
+        "date": "2026-08-01",
+        "amount": 2200.0,
+        "type": "debit",
+        "category": "rent",
+        "merchant": "Landlord LLC",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T05",
+        "date": "2026-09-01",
+        "amount": 2200.0,
+        "type": "debit",
+        "category": "rent",
+        "merchant": "Landlord LLC",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T06",
+        "date": "2026-10-01",
+        "amount": 2200.0,
+        "type": "debit",
+        "category": "rent",
+        "merchant": "Landlord LLC",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T07",
+        "date": "2026-07-22",
+        "amount": 112.4,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T08",
+        "date": "2026-07-29",
+        "amount": 98.75,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T09",
+        "date": "2026-08-05",
+        "amount": 134.2,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T10",
+        "date": "2026-08-12",
+        "amount": 105.6,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T11",
+        "date": "2026-08-19",
+        "amount": 121.35,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T12",
+        "date": "2026-08-26",
+        "amount": 89.9,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T13",
+        "date": "2026-09-02",
+        "amount": 142.1,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T14",
+        "date": "2026-09-09",
+        "amount": 117.45,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T15",
+        "date": "2026-09-16",
+        "amount": 103.25,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T16",
+        "date": "2026-09-23",
+        "amount": 128.8,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T17",
+        "date": "2026-09-30",
+        "amount": 95.15,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T18",
+        "date": "2026-10-07",
+        "amount": 110.5,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T19",
+        "date": "2026-10-14",
+        "amount": 122.65,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T20",
+        "date": "2026-07-25",
+        "amount": 64.5,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Sushi Bar",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T21",
+        "date": "2026-08-08",
+        "amount": 42.3,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Pizza Place",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T22",
+        "date": "2026-08-22",
+        "amount": 58.75,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Sushi Bar",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T23",
+        "date": "2026-09-05",
+        "amount": 38.9,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Burger Joint",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T24",
+        "date": "2026-09-19",
+        "amount": 47.2,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Pizza Place",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T25",
+        "date": "2026-10-03",
+        "amount": 61.4,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Sushi Bar",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T26",
+        "date": "2026-07-27",
+        "amount": 52.3,
+        "type": "debit",
+        "category": "transport",
+        "merchant": "Shell",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T27",
+        "date": "2026-08-15",
+        "amount": 48.9,
+        "type": "debit",
+        "category": "transport",
+        "merchant": "Shell",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T28",
+        "date": "2026-09-11",
+        "amount": 55.6,
+        "type": "debit",
+        "category": "transport",
+        "merchant": "BP",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T29",
+        "date": "2026-10-09",
+        "amount": 50.25,
+        "type": "debit",
+        "category": "transport",
+        "merchant": "Shell",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T30",
+        "date": "2026-08-03",
+        "amount": 132.8,
+        "type": "debit",
+        "category": "utilities",
+        "merchant": "Power Co",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T31",
+        "date": "2026-09-04",
+        "amount": 141.2,
+        "type": "debit",
+        "category": "utilities",
+        "merchant": "Power Co",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T32",
+        "date": "2026-10-05",
+        "amount": 128.45,
+        "type": "debit",
+        "category": "utilities",
+        "merchant": "Power Co",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T33",
+        "date": "2026-08-10",
+        "amount": 45.6,
+        "type": "debit",
+        "category": "utilities",
+        "merchant": "Water Util",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T35",
+        "date": "2026-08-01",
+        "amount": 15.99,
+        "type": "debit",
+        "category": "subscriptions",
+        "merchant": "Netflix",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T36",
+        "date": "2026-09-01",
+        "amount": 15.99,
+        "type": "debit",
+        "category": "subscriptions",
+        "merchant": "Netflix",
+        "account_id": "A1"
+      },
+      {
+        "id": "C001-T37",
+        "date": "2026-10-01",
+        "amount": 15.99,
+        "type": "debit",
+        "category": "subscriptions",
+        "merchant": "Netflix",
+        "account_id": "A1"
+      }
+    ]
+  },
+  {
+    "client_id": "C002",
+    "name": "Budi Santoso",
+    "age": 38,
+    "risk_profile": "moderate",
+    "monthly_income": 9000,
+    "target_allocation": {
+      "equity": 0.7,
+      "bond": 0.2,
+      "cash": 0.1
+    },
+    "accounts": [
+      {
+        "account_id": "B1",
+        "type": "checking",
+        "balance": 12000,
+        "currency": "USD"
+      }
+    ],
+    "holdings": [
+      {
+        "symbol": "VTI",
+        "asset_class": "equity",
+        "quantity": 70,
+        "market_value": 6000
+      },
+      {
+        "symbol": "VXUS",
+        "asset_class": "equity",
+        "quantity": 80,
+        "market_value": 5000
+      },
+      {
+        "symbol": "AAPL",
+        "asset_class": "equity",
+        "quantity": 17,
+        "market_value": 3000
+      },
+      {
+        "symbol": "BND",
+        "asset_class": "bond",
+        "quantity": 50,
+        "market_value": 4000
+      },
+      {
+        "symbol": "CASH",
+        "asset_class": "cash",
+        "quantity": 2000,
+        "market_value": 2000
+      }
+    ],
+    "transactions": [
+      {
+        "id": "C002-T01",
+        "date": "2026-07-31",
+        "amount": 9000.0,
+        "type": "credit",
+        "category": "income",
+        "merchant": "Employer",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T02",
+        "date": "2026-08-29",
+        "amount": 9000.0,
+        "type": "credit",
+        "category": "income",
+        "merchant": "Employer",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T03",
+        "date": "2026-09-30",
+        "amount": 9000.0,
+        "type": "credit",
+        "category": "income",
+        "merchant": "Employer",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T04",
+        "date": "2026-08-01",
+        "amount": 1800.0,
+        "type": "debit",
+        "category": "rent",
+        "merchant": "Landlord LLC",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T05",
+        "date": "2026-09-01",
+        "amount": 1800.0,
+        "type": "debit",
+        "category": "rent",
+        "merchant": "Landlord LLC",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T06",
+        "date": "2026-10-01",
+        "amount": 1800.0,
+        "type": "debit",
+        "category": "rent",
+        "merchant": "Landlord LLC",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T07",
+        "date": "2026-07-21",
+        "amount": 102.3,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T08",
+        "date": "2026-07-28",
+        "amount": 88.45,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T09",
+        "date": "2026-08-04",
+        "amount": 115.6,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T10",
+        "date": "2026-08-11",
+        "amount": 94.2,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T11",
+        "date": "2026-08-18",
+        "amount": 108.75,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T12",
+        "date": "2026-08-25",
+        "amount": 121.3,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T13",
+        "date": "2026-09-03",
+        "amount": 96.8,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T14",
+        "date": "2026-09-17",
+        "amount": 104.55,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T15",
+        "date": "2026-09-24",
+        "amount": 112.4,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T16",
+        "date": "2026-10-06",
+        "amount": 90.25,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T17",
+        "date": "2026-09-10",
+        "amount": 1200.0,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T18",
+        "date": "2026-09-12",
+        "amount": 85.4,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T19",
+        "date": "2026-09-12",
+        "amount": 85.4,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T20",
+        "date": "2026-08-15",
+        "amount": 12.5,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Coffee Shop",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T21",
+        "date": "2026-08-15",
+        "amount": 8.99,
+        "type": "debit",
+        "category": "shopping",
+        "merchant": "Bookstore",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T22",
+        "date": "2026-08-15",
+        "amount": 23.4,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Coffee Shop",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T23",
+        "date": "2026-08-15",
+        "amount": 5.0,
+        "type": "debit",
+        "category": "shopping",
+        "merchant": "Newsstand",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T24",
+        "date": "2026-08-15",
+        "amount": 31.2,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Bakery",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T25",
+        "date": "2026-08-15",
+        "amount": 17.8,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Coffee Shop",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T26",
+        "date": "2026-08-15",
+        "amount": 9.6,
+        "type": "debit",
+        "category": "shopping",
+        "merchant": "Pharmacy",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T27",
+        "date": "2026-09-20",
+        "amount": 5000.0,
+        "type": "debit",
+        "category": "transfer",
+        "merchant": "Crypto Exchange",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T28",
+        "date": "2026-07-26",
+        "amount": 45.6,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Ramen House",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T29",
+        "date": "2026-09-08",
+        "amount": 52.3,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Ramen House",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T30",
+        "date": "2026-08-08",
+        "amount": 51.4,
+        "type": "debit",
+        "category": "transport",
+        "merchant": "Shell",
+        "account_id": "B1"
+      },
+      {
+        "id": "C002-T31",
+        "date": "2026-09-15",
+        "amount": 49.8,
+        "type": "debit",
+        "category": "transport",
+        "merchant": "Shell",
+        "account_id": "B1"
+      }
+    ]
+  },
+  {
+    "client_id": "C003",
+    "name": "Siti Rahayu",
+    "age": 60,
+    "risk_profile": "conservative",
+    "monthly_income": 15000,
+    "target_allocation": {
+      "equity": 0.3,
+      "bond": 0.5,
+      "cash": 0.2
+    },
+    "accounts": [
+      {
+        "account_id": "C1",
+        "type": "savings",
+        "balance": 25000,
+        "currency": "USD"
+      },
+      {
+        "account_id": "C2",
+        "type": "brokerage",
+        "balance": 50000,
+        "currency": "USD"
+      }
+    ],
+    "holdings": [
+      {
+        "symbol": "BBCA",
+        "asset_class": "equity",
+        "quantity": 4000,
+        "market_value": 40000
+      },
+      {
+        "symbol": "BND",
+        "asset_class": "bond",
+        "quantity": 90,
+        "market_value": 7500
+      },
+      {
+        "symbol": "CASH",
+        "asset_class": "cash",
+        "quantity": 2500,
+        "market_value": 2500
+      }
+    ],
+    "transactions": [
+      {
+        "id": "C003-T01",
+        "date": "2026-07-31",
+        "amount": 15000.0,
+        "type": "credit",
+        "category": "income",
+        "merchant": "Employer",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T02",
+        "date": "2026-08-29",
+        "amount": 15000.0,
+        "type": "credit",
+        "category": "income",
+        "merchant": "Employer",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T03",
+        "date": "2026-09-30",
+        "amount": 15000.0,
+        "type": "credit",
+        "category": "income",
+        "merchant": "Employer",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T04",
+        "date": "2026-08-01",
+        "amount": 2800.0,
+        "type": "debit",
+        "category": "housing",
+        "merchant": "Bank Mortgage",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T05",
+        "date": "2026-09-01",
+        "amount": 2800.0,
+        "type": "debit",
+        "category": "housing",
+        "merchant": "Bank Mortgage",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T06",
+        "date": "2026-10-01",
+        "amount": 2800.0,
+        "type": "debit",
+        "category": "housing",
+        "merchant": "Bank Mortgage",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T07",
+        "date": "2026-07-23",
+        "amount": 132.5,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T08",
+        "date": "2026-08-06",
+        "amount": 118.4,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T09",
+        "date": "2026-08-20",
+        "amount": 95.3,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T10",
+        "date": "2026-09-04",
+        "amount": 141.2,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T11",
+        "date": "2026-09-18",
+        "amount": 107.6,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Trader Joes",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T12",
+        "date": "2026-10-08",
+        "amount": 125.45,
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Whole Foods",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T13",
+        "date": "2026-08-09",
+        "amount": 185.4,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Steakhouse",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T14",
+        "date": "2026-09-12",
+        "amount": 172.8,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Steakhouse",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T15",
+        "date": "2026-08-05",
+        "amount": 210.3,
+        "type": "debit",
+        "category": "utilities",
+        "merchant": "Power Co",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T16",
+        "date": "2026-09-06",
+        "amount": 198.75,
+        "type": "debit",
+        "category": "utilities",
+        "merchant": "Power Co",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T17",
+        "date": "2026-10-06",
+        "amount": 205.1,
+        "type": "debit",
+        "category": "utilities",
+        "merchant": "Power Co",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T18",
+        "date": "2026-09-15",
+        "amount": 850.0,
+        "type": "debit",
+        "category": "health",
+        "merchant": "City Hospital",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T19",
+        "date": "2026-08-22",
+        "amount": 1450.0,
+        "type": "debit",
+        "category": "travel",
+        "merchant": "Airline Co",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T20",
+        "date": "2026-07-30",
+        "amount": 42.8,
+        "type": "debit",
+        "category": "shopping",
+        "merchant": "Pharmacy",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T21",
+        "date": "2026-09-25",
+        "amount": 67.45,
+        "type": "debit",
+        "category": "shopping",
+        "merchant": "Bookstore",
+        "account_id": "C1"
+      },
+      {
+        "id": "C003-T22",
+        "date": "2026-10-12",
+        "amount": 28.9,
+        "type": "debit",
+        "category": "dining",
+        "merchant": "Coffee Shop",
+        "account_id": "C1"
+      }
+    ]
+  },
+  {
+    "client_id": "C004",
+    "name": "Dewi Lestari",
+    "risk_profile": "moderate",
+    "accounts": [
+      {
+        "account_id": "D1",
+        "type": "checking",
+        "balance": 8000,
+        "currency": "USD"
+      }
+    ],
+    "holdings": [
+      {
+        "symbol": "VTI",
+        "asset_class": "equity",
+        "quantity": 60,
+        "market_value": 5000
+      },
+      {
+        "symbol": "BND",
+        "asset_class": "bond",
+        "quantity": 60,
+        "market_value": 5000
+      },
+      {
+        "symbol": "CASH",
+        "asset_class": "cash",
+        "quantity": 5000,
+        "market_value": 5000
+      },
+      {
+        "symbol": "GLD",
+        "asset_class": "other",
+        "quantity": 30,
+        "market_value": 5000
+      }
+    ],
+    "transactions": []
+  },
+  {
+    "client_id": "C005",
+    "name": "Broken Record",
+    "accounts": [
+      {
+        "account_id": "E1",
+        "type": "checking",
+        "balance": 3000,
+        "currency": "USD"
+      }
+    ],
+    "transactions": [
+      {
+        "id": "C005-T01",
+        "date": "2026-09-01",
+        "amount": "abc",
+        "type": "debit",
+        "category": "groceries",
+        "merchant": "Store",
+        "account_id": "E1"
+      }
+    ]
+  }
+]
