@@ -7,6 +7,7 @@ from .anomaly_detector import AnomalyDetectorTool
 from .base import Tool
 from .client_loader import ClientLoaderTool
 from .crm import CRMTool
+from .llm_summarizer import LLMSummarizerTool
 from .portfolio_metrics import PortfolioMetricsTool
 
 
@@ -46,13 +47,19 @@ class ToolRegistry:
 
 
 def create_default_registry() -> ToolRegistry:
-    """Build a registry with all built-in tools registered."""
+    """Build a registry with all built-in tools registered.
+
+    The summarizer is registered without an LLM client (template mode);
+    pass a configured client to LLMSummarizerTool and re-register to
+    enable LLM narratives.
+    """
     registry = ToolRegistry()
     for tool in (
         ClientLoaderTool(),
         CRMTool(),
         PortfolioMetricsTool(),
         AnomalyDetectorTool(),
+        LLMSummarizerTool(),
     ):
         registry.register(tool)
     return registry
